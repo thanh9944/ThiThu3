@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%include css%>
+  </head>
+  <body class="container">
+
+  <%-include nav%>
+
+  <form method="post" action="/update-acc" enctype="application/x-www-form-urlencoded">
+    <div class="row" style="width: 600px">
+      <p style="font-size: 20px">Id</p>
+      <input  name="_id" value="<%= locals._id ? _id:'' %>" placeholder="Enter id">
+      <input disabled name="id" value="<%= locals.id ? id:'' %>" placeholder="Enter id">
+      <p style="font-size: 20px;margin-top: 10px">Name</p>
+      <input name="name" value="<%= locals.name ? name:'' %>" placeholder="Enter name">
+      <p style="font-size: 20px;margin-top: 10px">Email</p>
+      <input name="email" value="<%= locals.email ? email:'' %>" placeholder="Enter email">
+      <p style="font-size: 20px;margin-top: 10px">Password</p>
+      <input type="password" name="pass" value="<%= locals.pass ? pass:'' %>" placeholder="Enter password">
+      <p style="font-size: 20px;margin-top: 10px">Avatar</p>
+      <input type="file" name="avatar">
+      <button style="margin-top: 20px" type="submit">update</button>
+    </div>
+  </form>
+
+
+  </body>
+</html>

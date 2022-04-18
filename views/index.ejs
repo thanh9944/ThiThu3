@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <%include css%>
+  </head>
+  <body class="container">
+
+  <%-include nav%>
+
+  <% if(typeof alert != 'undefined') { %>
+    <% alert.forEach(function(error) { %>
+      <div class="alert alert-danger d-flex align-items-center" role="alert">
+        <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+          <use xlink:href="#exclamation-triangle-fill"/>
+        </svg>
+        <div>
+          <%= error.msg %>
+        </div>
+      </div>
+    <% }) %>
+  <% } %>
+
+  <form method="post" action="/add-acc" enctype="application/x-www-form-urlencoded">
+    <div class="row" style="width: 600px">
+      <p style="font-size: 20px">Id</p>
+      <input name="id" value="<%= locals.id ? id:'' %>" placeholder="Enter id">
+      <p style="font-size: 20px;margin-top: 10px">Name</p>
+      <input name="name" value="<%= locals.name ? name:'' %>" placeholder="Enter name">
+      <p style="font-size: 20px;margin-top: 10px">Email</p>
+      <input name="email" value="<%= locals.email ? email:'' %>" placeholder="Enter email">
+      <p style="font-size: 20px;margin-top: 10px">Password</p>
+      <input type="password" name="pass" value="<%= locals.pass ? pass:'' %>" placeholder="Enter password">
+      <p style="font-size: 20px;margin-top: 10px">Avatar</p>
+      <input type="file" name="avatar">
+      <button style="margin-top: 20px" type="submit">Add</button>
+    </div>
+  </form>
+
+  <% if (typeof data != 'undefined'){ %>
+    <div class="row">
+      <% for (var i = 0; i < data.length; i++) { %>
+        <div class="col-sm-4" style="margin-top: 20px;margin-bottom: 20px">
+          <p>ID: <%= data[i].id %> </p>
+          <p>Name: <%= data[i].name %> </p>
+          <p>Email: <%= data[i].email %> </p>
+          <p>Password: <%= data[i].pass %> </p>
+
+          <form method="get" action="/delete"
+                enctype="application/x-www-form-urlencoded">
+            <input hidden name="_id" value="<%= data[i]._id %>">
+            <button style="width: 70px" type="submit">Delete</button>
+          </form>
+
+          <form  method="post" action="/update"
+                 enctype="application/x-www-form-urlencoded">
+            <input hidden name="_id" value="<%= data[i]._id %>">
+            <input hidden name="id" value="<%= data[i].id %>">
+            <input hidden name="name" value="<%= data[i].name %>">
+            <input hidden name="email" value="<%= data[i].email%>">
+            <input hidden name="pass" value="<%= data[i].pass %>">
+            <button style="width: 70px" type="submit">Update</button>
+          </form>
+
+        </div>
+      <% } %>
+    </div>
+  <% } %>
+
+  </body>
+</html>
